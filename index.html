@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://bootswatch.com/_assets/css/custom.min.css">
     <link rel="stylesheet" href="https://unpkg.com/blaze-slider@1.9.1/dist/blaze.css"/>
     <link rel="stylesheet" href="blaze.css"/>
+    <link rel="stylesheet" href="styles.css"/>
     <title>Adam Winebager</title>
   </head>
   <body>
@@ -166,7 +167,6 @@
                               <img src="images/photographyPhotos/IMG_0303.JPG" class="d-block user-select-none" width="90%"></img>
                           </div> -->
 
-
                       </div>
                   </div>
               </div>
@@ -176,6 +176,10 @@
                   <!-- <div class="blaze-pagination"></div> -->
 
                   <button class="blaze-next" style="margin-left: 125px">next</button>
+              </div>
+              <div id="image-viewer">
+                  <span class="close">&times;</span>
+                  <img class="modal-content" id="full-image"></img>
               </div>
 
           </div>
@@ -250,6 +254,10 @@
                           loadExternalScript('slider.js', function() {
                               console.log('slider.js script loaded.');
                           });
+
+                          loadExternalScript('main.js', function() {
+                            console.log('main.js loaded')
+                          });
                       });
 
                       // Stop observing once section is loaded
@@ -286,8 +294,9 @@
               const div = document.createElement('div');
 
               const img = document.createElement('img');
+              //img.id = 'slider-images'
               img.src = url;
-              img.classList.add('d-block', 'user-select-none');
+              img.classList.add('d-block', 'user-select-none', 'slider-images');
               img.style.width = '90%';
               //img.style.height = '90%';
               img.style.margin = '25px';
