@@ -29,7 +29,7 @@ sliderImages.forEach(function(img) {
     var timeUp = Date.now(); //We definitely need to come back and fix this
     if (timeUp - timeDown < 200) {
       fullImage.src = img.src;
-      imageViewer.style.display = "block";
+      imageViewer.style.display = "flex";
     }
   })
 });
