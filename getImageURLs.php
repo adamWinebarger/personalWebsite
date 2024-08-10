@@ -1,3 +1,4 @@
+
 <?php
 
 $directory = 'images/photographyPhotos/';
@@ -8,7 +9,7 @@ foreach ($files as $file) {
   $filePath = $directory . $file;
 
   //Check that image ends in JPG
-  if (is_file($filePath) && (pathinfo($filePath, PATHINFO_EXTENSION) === 'JPG' || pathinfo($filePath, PATHINFO_EXTENSION) === 'jpg')) {
+  if (is_file($filePath) && (pathinfo($filePath, PATHINFO_EXTENSION) === 'WEBP' || pathinfo($filePath, PATHINFO_EXTENSION) === 'webp')) {
     //This is assuming project is served from web root
     $scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
 
