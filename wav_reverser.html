@@ -29,25 +29,31 @@
           <div id="navbarColor01" class="navbar-collapse collapse" style="">
             <ul class="navbar-nav me-auto">
               <li class="nav-item">
-                <a class="nav-link active" href="https://adam-winebarger.dev/">
+                <a class="nav-link active" href="#">
                   Home
                   <span class="visually-hidden">(current)</span>
                 </a>
               </li>
               <li class=nav-item>
-                  <a class="nav-link" href="https://adam-winebarger.dev/#about">About</a>
+                  <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item dropdown d-flex align-items-center">
+                <a class="nav-link" href="index.html#projects" role="button" style="padding-right:1px">Programming Projects</a>
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" role="button" style="padding-left:0;">
+                  <span class="dropdown-arrow"></span>
+                </a>
+                <div class="dropdown-menu" data-bs-popper="static">
+                  <a class="dropdown-item" href="./wav_reverser.html">.wav reverser</a>
+                </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="https://adam-winebarger.dev/index/#projects">Programming Projects</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="https://adam-winebarger.dev/#photos">Photography</a>
+                  <a class="nav-link" href="#photos">Photography</a>
               </li>
               <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Something Else</a>
               </li> -->
               <li class="nav-item">
-                  <a class="nav-link" href="https://adam-winebarger.dev/#contacts">Contact</a>
+                  <a class="nav-link" href="#contact">Contact</a>
               </li>
             </ul>
           </div>
@@ -78,6 +84,7 @@
       </div>
 
       <!-- I guess we'll throw that inline script we need down here -->
+      <script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
       <script src="wav_reverser/wav_reverser.js"></script>
       <script>
 
