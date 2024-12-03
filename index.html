@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css">
     <link rel="stylesheet" href="https://bootswatch.com/_assets/css/custom.min.css">
     <link rel="stylesheet" href="https://unpkg.com/blaze-slider@1.9.1/dist/blaze.css"/>
-    <link rel="stylesheet" href="blaze.css"/>
-    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="./blaze.css"/>
+    <link rel="stylesheet" href="./styles.css"/>
     <title>Adam Winebager</title>
   </head>
   <body>
@@ -39,8 +39,14 @@
               <li class=nav-item>
                   <a class="nav-link" href="#about">About</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#projects">Programming Projects</a>
+              <li class="nav-item dropdown d-flex align-items-center">
+                <a class="nav-link" href="index.html#projects" role="button" style="padding-right:1px">Programming Projects</a>
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" role="button" style="padding-left:0;">
+                  <span class="dropdown-arrow"></span>
+                </a>
+                <div class="dropdown-menu" data-bs-popper="static">
+                  <a class="dropdown-item" href="./wav_reverser.html">.wav reverser</a>
+                </div>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="#photos">Photography</a>
@@ -109,14 +115,14 @@
       <div class="card-header">
           <h1 id="projects">Programming Projects</h1>
       </div>
-      <div class="card-body text-info">
+      <div class="card-body text-info" style="padding-left:5%;padding-right:5%">
           <h3><a class="card-link" style="text-decoration:none" href="https://github.com/adamWinebarger">Github</a></h2>
           <br>
           <h3>Some of my more interesting school projects</h3>
           <ul>
-              <li class="text-success"><a style="text-decoration:none" href="https://github.com/adamWinebarger/pygameProject">Untitled Car Racing Game:</a> a little pygame project made for school. I found it to be pretty fun</li>
-              <li class="text-sucess"><a style="text-decoration:none" href="https://github.com/adamWinebarger/wavReverser">wav_Reverser:</a> a class project designed to reverse the audio on .wav files (inspired by the song "Work It" by Missy Elliot)</li>
-              <li class="text-warning"><a style="text-decoration:none" href="https://github.com/adamWinebarger/LinearAlgebraThings/tree/main">A Very Convinient Matrix Calculation Tool:</a> I had planned on incorporating more into this as a full-fledge program for concepts taught in linear algebra. But that didn't happen. The matrix calculator still ended up being really useful though.</li>
+              <li class="text-success"><a style="text-decoration:none" href="#projects">Untitled Car Racing Game:</a> a little pygame project made for school. I found it to be pretty fun  &nbsp;&nbsp;&nbsp;&nbsp; <a style="text-decoration:none" href="https://github.com/adamWinebarger/pygameProject">[View Git Repo] </a></li>
+              <li class="text-sucess" ><a style="text-decoration:none" href="./wav_reverser.html">wav_Reverser:</a> a class project designed to reverse the audio on .wav files (inspired by the song "Work It" by Missy Elliot)  &nbsp;&nbsp;&nbsp;&nbsp; <a style="text-decoration:none" href="https://github.com/adamWinebarger/wavReverser">[View Git Reop]</a></li>
+              <li class="text-warning"><a style="text-decoration:none" href="#projects">A Very Convinient Matrix Calculation Tool:</a> I had planned on incorporating more into this as a full-fledge program for concepts taught in linear algebra. But that didn't happen. The matrix calculator still ended up being really useful though.  &nbsp;&nbsp;&nbsp;&nbsp; <a style="text-decoration:none" href="https://github.com/adamWinebarger/LinearAlgebraThings/tree/main">[View Git Repo]</a></li>
           </ul>
           <br>
           <h3>Dr. Al's Parenting Tips & Tools</h3>

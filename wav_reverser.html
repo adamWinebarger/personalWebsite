@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://bootswatch.com/5/vapor/bootstrap.css">
+    <link rel="stylesheet" href="https://bootswatch.com/_vendor/bootstrap-icons/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css">
+    <link rel="stylesheet" href="https://bootswatch.com/_assets/css/custom.min.css">
+    <link rel="stylesheet" href="styles.css"/>
+    <title>wav Reverser - Adam Winebager</title>
+  </head>
+  <body>
+    <!--Heading...thing-->
+    <div class="page-header" id="banner">
+      <div class="col-lg-8 col-md-7 col-sm-6" style="padding-left:15px">
+        <h1>Check out my .wav Reverser</h1>
+        <p class="lead" style="padding-left:25px">A project by Adam Winebarger</p>
+      </div>
+    </div>
+
+      <!--Nav Bar-->
+
+      <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div id="navbarColor01" class="navbar-collapse collapse" style="">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">
+                  Home
+                  <span class="visually-hidden">(current)</span>
+                </a>
+              </li>
+              <li class=nav-item>
+                  <a class="nav-link" href="#about">About</a>
+              </li>
+              <li class="nav-item dropdown d-flex align-items-center">
+                <a class="nav-link" href="index.html#projects" role="button" style="padding-right:1px">Programming Projects</a>
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" role="button" style="padding-left:0;">
+                  <span class="dropdown-arrow"></span>
+                </a>
+                <div class="dropdown-menu" data-bs-popper="static">
+                  <a class="dropdown-item" href="./wav_reverser.html">.wav reverser</a>
+                </div>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="#photos">Photography</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Something Else</a>
+              </li> -->
+              <li class="nav-item">
+                  <a class="nav-link" href="#contact">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Main body code -->
+      <div class="card bg-dark border-danger mb-3" style="margin:45px;padding:25px">
+
+          <h1>My wav reverser</h1>
+
+        <div class="card-body text-white">
+            <p>This WAV reverser began as a student project at Grand Valley State University, originally assigned by Ira Woodring and implemented in C. For fun (and a challenge), I decided to incorporate it into this website using WebAssembly (WASM), despite starting with zero knowledge of WASM. The core logic reads a WAV file as a byte array in C, treating the char*/uint8_t* input as an int* to efficiently reverse 4-byte groupings. This approach preserves the interleaved left and right audio channel streams when generating the reversed output. While this could have been more straightforward to implement in JavaScript, using WASM turned it into a rewarding and educational journey—even if the sunk-cost fallacy played a role. </p>
+        </div>
+
+        <br><br>
+        <div style="padding:15px 25%">
+            <div class="card border-primary mb-3 text-white" id="uploadBox" style="padding:5%;border-radius:10px">
+              <input class="form-control btn-info bg-dark" type="file" id="fileInput" accept=".wav">
+              <p style="padding-top:10px"><span class="text-light click-button-light" style="">Click Here</span> or drag and drop to upload .wav file</p>
+            </div>
+            <div class="file-info text-danger" id="fileInfo"></div>
+        </div>
+
+        <div class="card-body text-white">
+            <p><b>Note that</b> unlike many file converters that require uploading and downloading files, this WAV reverser runs entirely on your device, thanks to WebAssembly. The processing happens locally in your browser, which, combined with the efficiency of WebAssembly, makes it incredibly fast. If you get your reversed WAV file almost instantly after uploading, don’t worry—it worked correctly! That’s just how quick client-side processing can be.</p>
+        </div>
+      </div>
+
+      <!-- I guess we'll throw that inline script we need down here -->
+      <script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="wav_reverser/wav_reverser.js"></script>
+      <script>
+
+        let reverser, reverseWav, malloc, free
+
+        const uploadBox = document.getElementById('uploadBox')
+        const fileInput = document.getElementById('fileInput')
+        const fileInfo = document.getElementById('fileInfo')
+
+        createWavReverser().then((Module) => {
+
+          //So first we need to create access to our exported C functions... or, you know, there's only 1. But still
+          reverseWav = Module.cwrap("reverseWav", "number", "[number]")
+          malloc = Module._malloc
+          free = Module._free
+
+          uploadBox.addEventListener('dragover', (event) => {
+            event.preventDefault()
+            uploadBox.classList.add('dragover')
+          })
+
+          uploadBox.addEventListener('dragleave', () => {
+            uploadBox.classList.remove('dragover')
+          })
+
+          uploadBox.addEventListener('drop', (event) => {
+            event.preventDefault()
+            uploadBox.classList.remove('dragover')
+            const file = event.dataTransfer.files[0]
+            handleFile(file)
+          })
+
+          uploadBox.addEventListener('click', () => {
+            fileInput.click()
+          })
+
+          fileInput.addEventListener("change", (event) => {
+            if (!reverseWav || !malloc || !free) {
+              console.error("It appears the WASM modules weren't initialized or something")
+              return;
+            }
+
+            const file = event.target.files[0]
+            if (!file) return;
+            handleFile(file)
+
+            const reader = new FileReader()
+            reader.onload = () => {
+              const inputData = new Uint8Array(reader.result)
+              const fileLength = inputData.length
+              console.log("File size: " + fileLength)
+              const inputPtr = malloc(fileLength)
+              Module.HEAPU8.set(inputData, inputPtr)
+
+              const resultPtr = reverseWav(inputPtr, fileLength)
+              if (resultPtr !== 0) {
+                const outputData = Module.HEAPU8.slice(resultPtr, resultPtr + inputData.length)
+                console.log("Wav File reversed successfully!")
+                //Now here we need to handle sending the new reversed file back to the user.
+                const reversedBlob = new Blob([outputData], {type: 'audio/wav'})
+
+                const downloadLink = document.createElement('a')
+                downloadLink.href = URL.createObjectURL(reversedBlob)
+                downloadLink.download = 'Reversed ' + file.name
+                downloadLink.click()
+              }
+
+              else {
+                console.log("Failed to reverse wav file")
+              }
+
+              free(inputPtr)
+              free(resultPtr)
+            }
+
+            reader.readAsArrayBuffer(file)
+
+          })
+        })
+
+        function handleFile(file) {
+          if (file.name.toLowerCase().slice(-3) !== 'wav') {
+            //console.log(file.name.toLowerCase().slice(-3) !== 'wav')
+            fileInfo.innerHTML = '<span class="text-danger">Invalid file uploaded</span>'
+          } else {
+            fileInfo.innerHTML = '<span class="text-success">File uploaded Successfully!</span>'
+          }
+        }
+
+      </script>
+
+  </body>
+</html>
