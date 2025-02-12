@@ -8,7 +8,7 @@ $imageURLs = [];
 foreach ($files as $file) {
   $filePath = $directory . $file;
 
-  //Check that image ends in JPG
+  //Check that image ends in JPG... now Webp I guess
   if (is_file($filePath) && (pathinfo($filePath, PATHINFO_EXTENSION) === 'WEBP' || pathinfo($filePath, PATHINFO_EXTENSION) === 'webp')) {
     //This is assuming project is served from web root
     $scheme = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http';
