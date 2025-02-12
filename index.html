@@ -74,7 +74,7 @@
             <img src="images/bernieAndTheKittens.webp" class="d-block user-select-none" width="75%" style="padding-left:25px;padding-right:25px">
           </div>
           <div class="col-lg-6" style="padding-top:5%;padding-bottom:5%">
-            <p class="card-text" style=";padding-right:25px">Hey there! Welcome to my little slice of the internet! This is where I nerd out about programming projects, share some of my favorite amateur photos, and ramble about life as an Army vet turned CS student. Stick around for some cool stuff and maybe a laugh or two.</p>
+            <p class="card-text" style="padding-right:25px">Hey there! Welcome to my little slice of the internet! This is where I nerd out about programming projects, share some of my favorite amateur photos, and ramble about life as an Army vet turned CS student. Stick around for some cool stuff and maybe a laugh or two.</p>
           </div>
 
         </div>
@@ -166,28 +166,28 @@
           <div class="blaze-slider my-slider">
               <div class="blaze-container">
                   <div class="blaze-track-container">
-                      <div class="blaze-track" id="blaze-track">
+                      <div class="blaze-track" id="blaze-track" style="">
                         <!-- so if we did this right then our images should render here-->
                           <!-- <div>
-                            <img src="images/photographyPhotos/IMG_0229.JPG" class="d-block user-select-none" width="90%"></img>
+                            <img src="images/photographyPhotos/IMG_0229.webp" class="d-block user-select-none" width="90%"></img>
                           </div>
                           <div>
-                              <img src="images/photographyPhotos/IMG_0233.JPG" class="d-block user-select-none" width="90%"></img>
+                              <img src="images/photographyPhotos/IMG_0233.webp" class="d-block user-select-none" width="90%"></img>
                           </div>
                           <div>
-                              <img src="images/photographyPhotos/IMG_0266.JPG" class="d-block user-select-none" width="90%"></img>
+                              <img src="images/photographyPhotos/IMG_0266.webp" class="d-block user-select-none" width="90%"></img>
                           </div>
                           <div>
-                              <img src="images/photographyPhotos/IMG_0269.JPG" class="d-block user-select-none" width="90%"></img>
+                              <img src="images/photographyPhotos/IMG_0269.webp" class="d-block user-select-none" width="90%"></img>
                           </div>
                           <div>
-                              <img src="images/photographyPhotos/IMG_0276.JPG" class="d-block user-select-none" width="90%"></img>
+                              <img src="images/photographyPhotos/IMG_0276.webp" class="d-block user-select-none" width="90%"></img>
                           </div>
                           <div>
-                              <img src="images/photographyPhotos/IMG_0283.JPG" class="d-block user-select-none" width="90%"></img>
+                              <img src="images/photographyPhotos/IMG_0283.webp" class="d-block user-select-none" width="90%"></img>
                           </div>
                           <div>
-                              <img src="images/photographyPhotos/IMG_0303.JPG" class="d-block user-select-none" width="90%"></img>
+                              <img src="images/photographyPhotos/IMG_0303.webp" class="d-block user-select-none" width="90%"></img>
                           </div> -->
 
                       </div>
@@ -264,32 +264,46 @@
           }
 
           // Load Blaze Slider and custom script when #photos section becomes visible
-          const photosSection = document.getElementById('photos');
-          const observer = new IntersectionObserver((entries) => {
-              entries.forEach(entry => {
-                  if (entry.isIntersecting) {
-                      // Load Blaze Slider script dynamically
-                      loadExternalScript('https://unpkg.com/blaze-slider@1.9.1/dist/blaze-slider.min.js', function() {
-                          console.log('Blaze Slider script loaded.');
+          // const photosSection = document.getElementById('photos');
+          // const observer = new IntersectionObserver((entries) => {
+          //     entries.forEach(entry => {
+          //         if (entry.isIntersecting) {
+          //             // Load Blaze Slider script dynamically
+          //             loadExternalScript('https://unpkg.com/blaze-slider@1.9.1/dist/blaze-slider.min.js', function() {
+          //                 console.log('Blaze Slider script loaded.');
+          //
+          //                 // Load additional script (slider.js) after Blaze Slider script is loaded
+          //                 loadExternalScript('slider.js', function() {
+          //                     console.log('slider.js script loaded.');
+          //                 });
+          //
+          //                 loadExternalScript('main.js', function() {
+          //                   console.log('main.js loaded')
+          //                 });
+          //             });
+          //
+          //             // Stop observing once section is loaded
+          //             observer.unobserve(photosSection);
+          //         }
+          //     });
+          // });
+          //
+          // // Start observing the #photos section
+          // observer.observe(photosSection);
+          loadExternalScript('https://unpkg.com/blaze-slider@1.9.1/dist/blaze-slider.min.js', function() {
+              console.log('Blaze Slider script loaded.');
 
-                          // Load additional script (slider.js) after Blaze Slider script is loaded
-                          loadExternalScript('slider.js', function() {
-                              console.log('slider.js script loaded.');
-                          });
+              // Load additional script (slider.js) after Blaze Slider script is loaded
+              loadExternalScript('slider.js', function() {
+                  console.log('slider.js script loaded.');
+              });
 
-                          loadExternalScript('main.js', function() {
-                            console.log('main.js loaded')
-                          });
-                      });
-
-                      // Stop observing once section is loaded
-                      observer.unobserve(photosSection);
-                  }
+              loadExternalScript('main.js', function() {
+                console.log('main.js loaded')
               });
           });
 
-          // Start observing the #photos section
-          observer.observe(photosSection);
+
       });
 
       // Function to fetch image URLs from server
@@ -316,12 +330,21 @@
               const div = document.createElement('div');
 
               const img = document.createElement('img');
+              const p = document.createElement('p')
+
               //img.id = 'slider-images'
               img.src = url;
               img.classList.add('d-block', 'user-select-none', 'slider-images');
               img.style.width = '90%';
               //img.style.height = '90%';
               img.style.margin = '25px';
+              //img.loading = "lazy";
+
+              img.onload = () => {
+                //img.classList.add('slider-img-fade-in')
+                resolve(img)
+              }
+
               //img.style.aspect-ratio = '1/1';
               div.appendChild(img);
               trackContainer.appendChild(div);
@@ -338,7 +361,7 @@
           })
           .catch(error => {
               console.error('Error fetching image URLs:', error);
-          })
+      })
 
     </script>
 
