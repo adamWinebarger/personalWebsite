@@ -168,6 +168,15 @@
                   <div class="blaze-track-container">
                       <div class="blaze-track" id="blaze-track" style="">
                         <!-- so if we did this right then our images should render here-->
+                        <div>
+                            <img src="images/lightning1.webp" class="d-block user-select-none" width="90%"></img>
+                        </div>
+                        <div>
+                            <img src="images/Color1.webp" class="d-block user-select-none" width="90%"></img>
+                        </div>
+                        <div>
+                            <img src="images/downtown23.webp" class="d-block user-select-none" width="90%"></img>
+                        </div>
                           <!-- <div>
                             <img src="images/photographyPhotos/IMG_0229.webp" class="d-block user-select-none" width="90%"></img>
                           </div>
@@ -247,6 +256,56 @@
     <script src="slider.js"></script> -->
 
     <script>
+    // Function to fetch image URLs from server
+    function fetchImageURLs() {
+        return fetch('/getImageURLs.php')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch image URLs');
+                }
+                return response.json();
+            })
+            .catch(error => {
+                console.error('Error fetching image URLs:', error);
+                return []; // Return an empty array in case of error
+            });
+    }
+
+    // Function to inject images into the HTML
+    function injectImages(imageUrls) {
+        const trackContainer = document.querySelector('.blaze-track');
+        //const imageContainer = document.getElementById('blaze-track');
+
+        imageUrls.forEach(url => {
+            const div = document.createElement('div');
+
+            const img = document.createElement('img');
+            //img.id = 'slider-images'
+            img.src = url;
+            img.classList.add('d-block', 'user-select-none', 'slider-images');
+            img.style.width = '90%';
+            //img.style.height = '90%';
+            img.style.margin = '25px';
+            //img.style.aspect-ratio = '1/1';
+            div.appendChild(img);
+            trackContainer.appendChild(div);
+
+        });
+    }
+
+    // Fetch image URLs and inject images into the HTML
+    //Having this begin before we add the even-listener ~should get us a little extra time hopefully
+    fetchImageURLs()
+        .then(imageUrls => {
+            injectImages(imageUrls);
+            // Initialize Blaze Slider after images have been injected
+            //initializeBlazeSlider();
+        })
+        .catch(error => {
+            console.error('Error fetching image URLs:', error);
+        })
+
+
       document.addEventListener('DOMContentLoaded', function() {
           // Function to load external scripts dynamically
           function loadExternalScript(url, callback) {
@@ -264,7 +323,7 @@
           }
 
           // Load Blaze Slider and custom script when #photos section becomes visible
-          const photosSection = document.getElementById('photos');
+          const photosSection = document.getElementById('blaze-track');
           const observer = new IntersectionObserver((entries) => {
               entries.forEach(entry => {
                   if (entry.isIntersecting) {
@@ -291,54 +350,6 @@
           // Start observing the #photos section
           observer.observe(photosSection);
       });
-
-      // Function to fetch image URLs from server
-      function fetchImageURLs() {
-          return fetch('/getImageURLs.php')
-              .then(response => {
-                  if (!response.ok) {
-                      throw new Error('Failed to fetch image URLs');
-                  }
-                  return response.json();
-              })
-              .catch(error => {
-                  console.error('Error fetching image URLs:', error);
-                  return []; // Return an empty array in case of error
-              });
-      }
-
-      // Function to inject images into the HTML
-      function injectImages(imageUrls) {
-          const trackContainer = document.querySelector('.blaze-track');
-          //const imageContainer = document.getElementById('blaze-track');
-
-          imageUrls.forEach(url => {
-              const div = document.createElement('div');
-
-              const img = document.createElement('img');
-              //img.id = 'slider-images'
-              img.src = url;
-              img.classList.add('d-block', 'user-select-none', 'slider-images');
-              img.style.width = '90%';
-              //img.style.height = '90%';
-              img.style.margin = '25px';
-              //img.style.aspect-ratio = '1/1';
-              div.appendChild(img);
-              trackContainer.appendChild(div);
-
-          });
-      }
-
-      // Fetch image URLs and inject images into the HTML
-      fetchImageURLs()
-          .then(imageUrls => {
-              injectImages(imageUrls);
-              // Initialize Blaze Slider after images have been injected
-              //initializeBlazeSlider();
-          })
-          .catch(error => {
-              console.error('Error fetching image URLs:', error);
-          })
 
     </script>
 
