@@ -5,8 +5,8 @@ const blazeSlider = new BlazeSlider(sliderEl, {
     enableAutoplay: true,
     slidesToScroll: 6,
     slidesToShow: 3,
-    transitionDuration: 10000,
-    autoplayInterval: 5000,
+    transitionDuration: 3000,
+    autoplayInterval: 10000,
     loop: true,
     draggable: true
   },
