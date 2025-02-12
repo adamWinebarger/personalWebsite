@@ -264,32 +264,32 @@
           }
 
           // Load Blaze Slider and custom script when #photos section becomes visible
-          // const photosSection = document.getElementById('photos');
-          // const observer = new IntersectionObserver((entries) => {
-          //     entries.forEach(entry => {
-          //         if (entry.isIntersecting) {
-          //             // Load Blaze Slider script dynamically
-          //             loadExternalScript('https://unpkg.com/blaze-slider@1.9.1/dist/blaze-slider.min.js', function() {
-          //                 console.log('Blaze Slider script loaded.');
-          //
-          //                 // Load additional script (slider.js) after Blaze Slider script is loaded
-          //                 loadExternalScript('slider.js', function() {
-          //                     console.log('slider.js script loaded.');
-          //                 });
-          //
-          //                 loadExternalScript('main.js', function() {
-          //                   console.log('main.js loaded')
-          //                 });
-          //             });
-          //
-          //             // Stop observing once section is loaded
-          //             observer.unobserve(photosSection);
-          //         }
-          //     });
-          // });
-          //
-          // // Start observing the #photos section
-          // observer.observe(photosSection);
+          const photosSection = document.getElementById('photos');
+          const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                      // Load Blaze Slider script dynamically
+                      loadExternalScript('https://unpkg.com/blaze-slider@1.9.1/dist/blaze-slider.min.js', function() {
+                          console.log('Blaze Slider script loaded.');
+
+                          // Load additional script (slider.js) after Blaze Slider script is loaded
+                          loadExternalScript('slider.js', function() {
+                              console.log('slider.js script loaded.');
+                          });
+
+                          loadExternalScript('main.js', function() {
+                            console.log('main.js loaded')
+                          });
+                      });
+
+                      // Stop observing once section is loaded
+                      observer.unobserve(photosSection);
+                  }
+              });
+          });
+
+          // Start observing the #photos section
+          observer.observe(photosSection);
           loadExternalScript('https://unpkg.com/blaze-slider@1.9.1/dist/blaze-slider.min.js', function() {
               console.log('Blaze Slider script loaded.');
 
