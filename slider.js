@@ -1,6 +1,6 @@
-const sliderEl = document.querySelector(".blaze-slider");
+const sliderM2 = document.querySelector(".blaze-slider");
 
-const blazeSlider = new BlazeSlider(sliderEl, {
+const blazeSlider = new BlazeSlider(sliderM2, {
   all: {
     enableAutoplay: true,
     slidesToScroll: 6,
@@ -10,12 +10,12 @@ const blazeSlider = new BlazeSlider(sliderEl, {
     loop: true,
     draggable: true
   },
-  "(max-width: 60em)": {
+  "(max-width: 75em)": {
     slidesToShow: 2,
-    slidesToScroll: 4,
+    slidesToScroll: 2,
     slidesGap: "5vh"
   },
-  "(max-width: 30em)": {
+  "(max-width: 48em)": {
     slidesToShow: 1,
     slidesToScroll: 2
   }
@@ -31,3 +31,42 @@ blazeSlider.onSlide(
     // });
   }
 );
+
+//Ok this is how we should actually do it
+var sliderImages = document.querySelectorAll(".blaze-slider .slider-images");
+var fullImage = document.getElementById("full-image");
+var imageViewer = document.getElementById("image-viewer");
+var closeButton = document.querySelector("#image-viewer .close");
+
+// Add event listeners
+sliderImages.forEach(function(img) {
+  var timeDown = 0;
+  img.addEventListener("mousedown", function() {
+    //fullImage.src = img.src;
+    //imageViewer.style.display = "block";
+    timeDown = Date.now(); //wow this is janky
+    console.log("Banana")
+  });
+
+  img.addEventListener("mouseup", function() {
+    var timeUp = Date.now(); //We definitely need to come back and fix this
+    if (timeUp - timeDown < 200) {
+      fullImage.src = img.src;
+      imageViewer.style.display = "flex";
+    }
+  })
+});
+
+closeButton.addEventListener("click", function() {
+  imageViewer.style.display = "none";
+});
+
+// Add click event listener to the document
+imageViewer.addEventListener("click", function(event) {
+  // Check if the clicked element is outside of the image modal
+  if (event.target !== fullImage) {
+    imageViewer.style.display = "none";
+  }
+});
+
+console.log("slider.js loaded")

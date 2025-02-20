@@ -7,17 +7,17 @@
 
 }
 
-@media (max-width: 900px) {
+/* @media (max-width: 1200px) {
   .blaze-slider.my-slider {
     --slides-to-show: 2;
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 768px) {
   .blaze-slider.my-slider {
     --slides-to-show: 1;
   }
-}
+} */
 
 /* other styles */
 
