@@ -285,8 +285,8 @@
     </div>
 
     <script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- <script src="https://unpkg.com/blaze-slider@1.9.1/dist/blaze-slider.min.js"></script>
-    <script src="./slider.js"></script>
+    <script src="https://unpkg.com/blaze-slider@1.9.1/dist/blaze-slider.min.js"></script>
+    <!-- <script src="./slider.js"></script>
     <script src="./main.js"></script> -->
 
 
@@ -336,18 +336,18 @@
         });
     }
 
-    loadExternalScript('https://unpkg.com/blaze-slider@1.9.1/dist/blaze-slider.min.js', function() {
-        console.log('Blaze Slider script loaded.');
-
-        // Load additional script (slider.js) after Blaze Slider script is loaded
-        loadExternalScript('slider.js', function() {
-            console.log('slider.js script loaded.');
-        });
-
-        // loadExternalScript('main.js', function() {
-        //   console.log('main.js loaded')
-        // });
-    });
+    // loadExternalScript('https://unpkg.com/blaze-slider@1.9.1/dist/blaze-slider.min.js', function() {
+    //     console.log('Blaze Slider script loaded.');
+    //
+    //     // Load additional script (slider.js) after Blaze Slider script is loaded
+    //     loadExternalScript('slider.js', function() {
+    //         console.log('slider.js script loaded.');
+    //     });
+    //
+    //     // loadExternalScript('main.js', function() {
+    //     //   console.log('main.js loaded')
+    //     // });
+    // });
 
     // Fetch image URLs and inject images into the HTML
     //Having this begin before we add the even-listener ~should get us a little extra time hopefully
@@ -363,50 +363,50 @@
         })
 
 
-      // document.addEventListener('DOMContentLoaded', function() {
-      //     // Function to load external scripts dynamically
-      //     function loadExternalScript(url, callback) {
-      //         var script = document.createElement('script');
-      //         script.src = url;
-      //         script.onload = callback;
-      //         document.head.appendChild(script);
-      //     }
-      //
-      //     // Function to initialize Blaze Slider
-      //     // function initializeBlazeSlider() {
-      //     //     const mySlider = new BlazeSlider('.my-slider', {
-      //     //         // Customize slider options here
-      //     //     });
-      //     // }
-      //
-      //     // Load Blaze Slider and custom script when #photos section becomes visible
-      //     const photosSection = document.getElementById('blaze-track');
-      //     const observer = new IntersectionObserver((entries) => {
-      //         entries.forEach(entry => {
-      //             if (entry.isIntersecting) {
-      //                 // Load Blaze Slider script dynamically
-      //                 loadExternalScript('https://unpkg.com/blaze-slider@1.9.1/dist/blaze-slider.min.js', function() {
-      //                     console.log('Blaze Slider script loaded.');
-      //
-      //                     // Load additional script (slider.js) after Blaze Slider script is loaded
-      //                     loadExternalScript('slider.js', function() {
-      //                         console.log('slider.js script loaded.');
-      //                     });
-      //
-      //                     loadExternalScript('main.js', function() {
-      //                       console.log('main.js loaded')
-      //                     });
-      //                 });
-      //
-      //                 // Stop observing once section is loaded
-      //                 observer.unobserve(photosSection);
-      //             }
-      //         });
-      //     });
+      document.addEventListener('DOMContentLoaded', function() {
+          // Function to load external scripts dynamically
+          function loadExternalScript(url, callback) {
+              var script = document.createElement('script');
+              script.src = url;
+              script.onload = callback;
+              document.head.appendChild(script);
+          }
 
-          // Start observing the #photos section
-          //observer.observe(photosSection);
-      //});
+          // Function to initialize Blaze Slider
+          // function initializeBlazeSlider() {
+          //     const mySlider = new BlazeSlider('.my-slider', {
+          //         // Customize slider options here
+          //     });
+          // }
+
+          // Load Blaze Slider and custom script when #photos section becomes visible
+          const photosSection = document.getElementById('blaze-track');
+          const observer = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                      // Load Blaze Slider script dynamically
+                      loadExternalScript('./slider.js', function() {
+                          console.log('Blaze Slider script loaded.');
+
+                          // Load additional script (slider.js) after Blaze Slider script is loaded
+                          // loadExternalScript('slider.js', function() {
+                          //     console.log('slider.js script loaded.');
+                          // });
+
+                          loadExternalScript('main.js', function() {
+                            console.log('main.js loaded')
+                          });
+                      });
+
+                      // Stop observing once section is loaded
+                      observer.unobserve(photosSection);
+                  }
+              });
+          });
+
+          //Start observing the #photos section
+          observer.observe(photosSection);
+      });
 
     </script>
 
