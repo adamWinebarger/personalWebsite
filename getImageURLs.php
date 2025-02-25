@@ -1,7 +1,7 @@
 
 <?php
 
-$directory = 'images/photographyPhotos/';
+$directory = 'images/photographyPhotos/Rev2/';
 $files = scandir($directory);
 $imageURLs = [];
 
