@@ -293,6 +293,7 @@
 
 
     <script>
+
     //function so that we can manually load our scripts
     function loadExternalScript(url, callback) {
         var script = document.createElement('script');
@@ -338,18 +339,7 @@
         });
     }
 
-    // loadExternalScript('https://unpkg.com/blaze-slider@1.9.1/dist/blaze-slider.min.js', function() {
-    //     console.log('Blaze Slider script loaded.');
-    //
-    //     // Load additional script (slider.js) after Blaze Slider script is loaded
-    //     loadExternalScript('slider.js', function() {
-    //         console.log('slider.js script loaded.');
-    //     });
-    //
-    //     // loadExternalScript('main.js', function() {
-    //     //   console.log('main.js loaded')
-    //     // });
-    // });
+
 
     /* I guess this is where the driver code starts... */
 
@@ -382,6 +372,9 @@
           //         // Customize slider options here
           //     });
           // }
+
+          //Loading in our image
+          document.body.classList.add("loaded");
 
           // Load Blaze Slider and custom script when #photos section becomes visible
           const photosSection = document.getElementById('blaze-track');

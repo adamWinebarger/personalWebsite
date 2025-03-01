@@ -45,6 +45,14 @@ p {
   align-items: center;
   color: white;
   text-align: center;
+
+  /* Start fully transparent */
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+
+body.loaded .parralax {
+  opacity: 1;
 }
 
 @media only screen and (max-device-width: 1366px) {
@@ -98,9 +106,11 @@ p {
 }
 
 .fade-in {
-	opacity: 1;
+	opacity: 0;
 	animation-name: fadeInOpacity;
 	animation-iteration-count: 1;
+  animation-delay: 2s; /* 1-second delay */
+  animation-fill-mode: forwards; /* Keeps final opacity */
 	animation-timing-function: ease-in;
 	animation-duration: 1s;
 }
