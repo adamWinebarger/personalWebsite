@@ -1,5 +1,65 @@
 p {
-  font-family: "Helvetica Neue"
+  font-family: "Helvetica Neue";
+  font-size: 1rem; /* Default size */
+}
+
+@media (max-width: 1200px) { /* Adjust for mobile screens */
+  p {
+    font-size: 1.4rem;
+  }
+
+  li {
+    font-size: 1.4rem;
+  }
+
+  a {
+    font-size:1.4rem;
+  }
+
+  h1 {
+    font-size:2.4rem;
+  }
+
+  div {
+    font-size: 1.4rem;
+  }
+}
+
+
+/* Stuff for my parralex thing */
+.parralax {
+  background-image: url("./images/IMG_0498_3.webp");
+  /* min-height:100vh; */
+
+  /* min-height:100vh; */
+  width:100%;
+  position: relative;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  overflow:hidden;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+@media only screen and (max-device-width: 1366px) {
+  .parralax {
+    background-attachment: scroll;
+
+  }
+}
+
+.welcome-content {
+  background: rgba(0, 0, 0, 0.5); /* Optional dark overlay */
+  padding: 20px;
+  border-radius: 10px;
+  margin: 15px;
+  padding:20px;
 }
 
 /* Stuff for images */
@@ -35,6 +95,23 @@ p {
 
 .slider-img-fade-in {
   opacity: 1; /* Fully visible after loading */
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 1s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 
 /* The fuck does this even do? */
