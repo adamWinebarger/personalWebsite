@@ -48,17 +48,30 @@ sliderImages.forEach(function(img) {
     console.log("Banana")
   });
 
+  //Kind of a jank way to view our photos when things aren't sliding.
+  //Since we're getting a bit of overlap with the navbar, I'm just going to make it
+  //so the thing is invisible when they view one of those photos.
+  //
+  // Also added in functionality to make it reappear when someone destroys one of the photos.
   img.addEventListener("mouseup", function() {
     var timeUp = Date.now(); //We definitely need to come back and fix this
     if (timeUp - timeDown < 200) {
       fullImage.src = img.src;
       imageViewer.style.display = "flex";
+
+      let header = document.getElementById("homePageHeader")
+      header.style.visibility = "hidden"
+      document.getElementsByTagName('body')[0].style.overflow = 'hidden'; //This might lock scrolling
     }
   })
 });
 
+//This is for our close button functionality.
 closeButton.addEventListener("click", function() {
   imageViewer.style.display = "none";
+  let header = document.getElementById("homePageHeader")
+  header.style.visibility = "visible"
+  document.getElementsByTagName('body')[0].style.overflow = 'visible';
 });
 
 // Add click event listener to the document
@@ -66,6 +79,9 @@ imageViewer.addEventListener("click", function(event) {
   // Check if the clicked element is outside of the image modal
   if (event.target !== fullImage) {
     imageViewer.style.display = "none";
+    let header = document.getElementById("homePageHeader")
+    header.style.visibility = "visible"
+    document.getElementsByTagName('body')[0].style.overflow = 'visible';
   }
 });
 
